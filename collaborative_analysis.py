@@ -8,7 +8,7 @@ Instructions:
   - Each partner works on their OWN branch, then merge via pull requests.
 
 When both sections are complete, run:
-    python collaborative_analysis.py
+    python collaborative_analysis.py ggg
 
 The main() function calls everything and prints a full weather report.
 """
@@ -33,7 +33,10 @@ def fahrenheit_to_celsius(temp_f):
         Temperature in Celsius.
     """
     # TODO (Partner A): implement the conversion
-    pass
+
+    celsius = (temp_f - 32) * 5/9
+
+    return celsius
 
 
 def celsius_to_fahrenheit(temp_c):
@@ -52,7 +55,9 @@ def celsius_to_fahrenheit(temp_c):
         Temperature in Fahrenheit.
     """
     # TODO (Partner A): implement the conversion
-    pass
+    fahrenheit = temp_c * 9/5 + 32
+
+    return fahrenheit
 
 
 def daily_temp_range(high_f, low_f):
@@ -71,7 +76,11 @@ def daily_temp_range(high_f, low_f):
         {"range_f": float, "range_c": float}
     """
     # TODO (Partner A): compute range in F and convert to C
-    pass
+    range_f = high_f - low_f
+
+    range_c = fahrenheit_to_celsius(high_f) - fahrenheit_to_celsius(low_f)
+
+    return {f"range_f: {range_f}", f"range_c: {range_c}"}
 
 
 # ============================================================
@@ -98,6 +107,10 @@ def wind_chill(temp_f, wind_mph):
     """
     # TODO (Partner B): implement the NWS wind chill formula
     # Return None if temp_f > 50 or wind_mph < 3
+    WC = 35.75 + 0.6215 * temp_f - 35.75 * (wind_mph**0.16) + 0.4275 * temp_f *(wind_mph**0.16)
+    if temp_f > 50 or wind_mph < 3:
+        return None
+    return WC
     pass
 
 
@@ -124,6 +137,11 @@ def heat_index(temp_f, rh):
     """
     # TODO (Partner B): implement the simplified heat index
     # Return None if temp_f < 80
+    HI = -42.379 + 2.04901523* temp_f + 10.14333127*rh
+    - 0.22475541*temp_f*rh - 0.00683783*temp_f^2 - 0.05481717*rh^2
+    + 0.00122874*temp_f^2*rh + 0.00085282*temp_f*rh^2
+    - 0.00000199*temp_f^2*rh^2
+    return HI
     pass
 
 
